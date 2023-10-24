@@ -11,18 +11,28 @@
  */
 public class Solution {
     public boolean hasCycle(ListNode head) {
-        HashSet<ListNode> m = new HashSet<>();
         if(head == null) return false;
+        // Approach1: use hashset or hashmap
 
-        ListNode pointer = head;
-        while(pointer != null) {
-            if(!m.contains(pointer)) {
-                m.add(pointer);
-            } else {
+        // HashSet<ListNode> m = new HashSet<>();
+        // ListNode pointer = head;
+        // while(pointer != null) {
+        //     if(!m.contains(pointer)) {
+        //         m.add(pointer);
+        //     } else {
+        //         return true;
+        //     }
+
+        //     pointer = pointer.next;
+        // }
+        // Approcah2: use slow and fast Pointer
+        ListNode slow_pointer = head, fast_pointer = head;
+        while (fast_pointer != null && fast_pointer.next != null) {
+            slow_pointer = slow_pointer.next;
+            fast_pointer = fast_pointer.next.next;
+            if (slow_pointer == fast_pointer) {
                 return true;
             }
-
-            pointer = pointer.next;
         }
 
         return false;
